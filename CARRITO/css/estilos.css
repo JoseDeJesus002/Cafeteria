@@ -1,0 +1,20 @@
+.Menu{
+	background-color: #fc7821;
+}
+.btn {
+	width: 100%;
+	border-radius: 50px;
+}
+
+.con {
+	background-color: #fc7821;
+	border-radius: 50px;
+}
+.card {
+	background-color: #E0E0E0;
+}
+.fo{
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	color: black;
+	background-color: #fc7821;
+}
