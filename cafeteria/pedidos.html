@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title class="titulo">CAFETERIA</title>
+    <link rel="stylesheet" href="css/style_index_respaldo.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
+</head>
+<body>
+    <ul>
+        <li><a href="#inicio">Cafeteria Tecatillo</a></li>
+        <li><img src="img_index/teca_logo.png" class="logo" width="75" height="70"></li>
+        <li style="float:right"><a href="#ajustes">Ajustes</a></li>
+        <li style="float:right"><a href="comida_rapida.html">Menu</a></li>
+        <li style="float:right"><a href="index.html">Inicio</a></li>
+      </ul>
+        <br><br><br><br>
+<main>
+    <div class="container center">
+        <h5>REALIZAR COMPRA</h5>
+    </div>
+    <div class="container center">
+        <div class="row">
+        <div class="form-group row">
+            <label for="example-text-input" class="col-2 col-form-label">Alumno: </label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="Erick Cast" id="example-text-input">
+            </div>
+          </div>
+          <div id="carrito" class="form-group table-responsive" >
+            <table class="form-group table" id="lista-compra" >
+                <thead>
+                    <tr>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Sub Total</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    
+
+                </tbody>
+                <tr>
+                    <th colspan="4" scope="col" class="text-right">SUB TOTAL :</th>
+                    <th scope="col">
+                        <p id="subtotal"></p>
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="4" scope="col" class="text-right ">IVA :</th>
+                    <th scope="col">
+                        <p id="iva"></p>
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="4" scope="col" class="text-right ">TOTAL :</th>
+                    <th scope="col">
+                        <p id="total"></p>
+                    </th>
+                </tr>
+            </table>
+        </div>
+        <br>
+
+                        <div class="col-md-4 mb-2">
+                            <a href="#vaciarcarrito" class="btn btn-danger btn-block">vaciar Carrito</a>
+                        </div>
+                    <br>
+                        <div class="col-md-4 mb-2">
+                            <a href="index.html" class="btn btn-info btn-block">Seguir comprando</a>
+                        </div>
+                        <br>
+                        <div class="col-md-4 mb-2">
+                            <a href="#compras" class="btn btn-success btn-block">Realizar compra</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+<script>
+        let tbody = document.querySelector('#lista-compra tbody');
+    let productosLS = obtenerProductosLocalStorage();
+    let subtotal = document.querySelector('#subtotal');
+    let iva = document.querySelector('#iva');
+    let total = document.querySelector('#total');
+    let totalCompra = 0;
+    let totalIva = 0;
+    let totalSubtotal = 0;
+
+    productosLS.forEach(function(producto){
+        let fila = document.createElement('tr');
+        fila.innerHTML = `
+            <td>
+                <img src="${producto.imagen}" width="100">
+            </td>
+            <td>${producto.nombre}</td>
+            <td>${producto.precio}</td>
+            <td>${producto.cantidad}</td>
+            <td>${producto.precio * producto.cantidad}</td>
+            <td>
+                <a href="#" class="borrar-producto" data-id="${producto.id}">X</a>
+            </td>
+        `;
+        tbody.appendChild(fila);
+        totalSubtotal = totalSubtotal + (producto.precio * producto.cantidad);
+        totalIva = totalSubtotal * 0.16;
+        totalCompra = totalSubtotal + totalIva;
+    });
+    subtotal.innerHTML = totalSubtotal;
+    iva.innerHTML = totalIva;
+    total.innerHTML = totalCompra;
+
+    //obtener productos del local storage
+    function obtenerProductosLocalStorage(){
+        let productoLS;
+        if(localStorage.getItem('productos') === null){
+            productoLS = [];
+        }else{
+            productoLS = JSON.parse(localStorage.getItem('productos'));
+        }
+        return productoLS;
+    }
+    //vaciar carrito
+    let vaciarCarrito = document.querySelector('#vaciarcarrito');
+    vaciarCarrito.addEventListener('click', function(e){
+        e.preventDefault();
+        localStorage.clear();
+        location.reload();
+    });
+    
+</script>
+
+
+
+</html>
