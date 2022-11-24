@@ -15,8 +15,11 @@ while($col = $resultadoBD->fetch_array()) {
 
 if($existente){
     echo "Ingreso de sesion correcto";
+   
 }else{
     echo "No estás registrado o la contrasena es incorrecta";
 }
+
+
 
 ?>

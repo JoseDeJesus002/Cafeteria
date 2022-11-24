@@ -10,7 +10,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Login y Register</title>
     
-    <link href="css/style_login.css" rel="stylesheet" />
+    <link href='css/style_login.css' rel='stylesheet'>
 
 </head>
 <body>
@@ -41,7 +41,7 @@
                         <input id='correo' name='correo' type='email' placeholder='Correo institucional'>
                         <input id='contrasena' name='contrasena' type='password' placeholder='Contraseña'>
                         <center><button onclick='llenar_formulario(1)'>Entrar</button></center>
-                        <p align='center'><img src="assets/images/teca_logo.png" height="200" width="200" /></p>
+                        <p align='center'><img src='assets/images/teca_logo.png'height='200' width='200'></p>
                     </form>
 
                     <!--Register-->
@@ -103,9 +103,17 @@
                     data: formulario, 
                     success: function(data){
                         alert(data)
-                        window.location.replace("./carro%20de%20super/carrito.html");              
+                        // if($('#respuesta').val()=="Ingreso de sesion correcto"){
+                        //     window.location.replace("./carro%20de%20super/carrito.html");
+                        $('#resultado').html(data)
+                        // }              
                     }
+                   
                 });
+                if($('#resultado').text()=="\nIngreso de sesion correcto"){
+                        window.location.replace("./index.html");
+
+                    }
             };
         </script>
         <script>
@@ -124,6 +132,9 @@
                 }
             };
         </script>
+
+        <p id="resultado" style="display:none;" ></p>
 </body>
+
 </html>
 
